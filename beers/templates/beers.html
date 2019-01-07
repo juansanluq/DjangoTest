@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+        <p> {{sample_var}}</p>
+        <p> {{otra_cosa}}</p>
+        <div style="display: flex; justify-content: center;">
+            <img src="{% static 'img/cervezas.jpg' %}" width="50%" height="50%"  text-align="center">
+        </div>
+{% endblock %}
