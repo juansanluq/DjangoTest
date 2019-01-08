@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from beers.views import first_view
+from beers.views import beer_list_view, beer_detail_view
 
 urlpatterns = [
-    url('',first_view, name='first-view'),
+    url('list/',beer_list_view, name='beer-list-view'),
+    url('detail/(?P<pk>\d+)',beer_detail_view,name='beer-detail-view'),
 ]
