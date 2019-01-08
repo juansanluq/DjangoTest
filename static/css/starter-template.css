@@ -1,7 +1,26 @@
 body {
-  padding-top: 5rem;
+  min-height: 75rem;
+  padding-top: 4.5rem;
 }
-.starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+
+main {
+ margin-top: 5%;
+}
+
+.navbar {
+  margin-bottom: 20px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 1%;
+  background: red;
+  border-radius: 148px 148px 148px 148px;
+}
+
+.dropdown-menu {
+    background: #ffe0b3;
+    margin-top: 10px;
+}
+
+.navbar-brand > img {
+    height: 80px;
 }
