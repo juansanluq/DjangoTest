@@ -5,7 +5,7 @@ from beers.models import Beer, Company
 
 class BeerAdmin(admin.ModelAdmin):
     list_display = ("name","abv","is_filtered")
-    list_filter = ("is_filtered","abv")
+    list_filter = ("is_filtered",)
     exclude = ("created_by","last_modified_by")
 
 
