@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <p> {{beer_list}}</p>
+        <p>
+
+        </p>
+        <div>
+                <ul>
+                        {% for beer in beer_list %}
+                                <li>{{beer}}</li>
+                        {% endfor %}
+                </ul>
+        </div>
 {% endblock %}
