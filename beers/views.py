@@ -1,4 +1,6 @@
 from django.db.models import Q
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -35,10 +37,12 @@ def beer_list_view(request):
     #ingredient = SpecialIngredient.objects.get(pk=1)
     #beer.special_ingredients.add(ingredient)
 
-    print(beer.special_ingredients.all())
+
+    #print(Beer.image.url)
 
     #special = SpecialIngredient(name="Romero")
     #special.save()
+
 
     context = {
         'beer_list': Beer.objects.all()
