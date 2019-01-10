@@ -33,7 +33,14 @@ def beer_list_view(request):
         beer.abv = 4.81
         beer.save()"""
 
-    beer = Beer.objects.filter(pk__in=[1,2,3,4,5]).first()
+    #beer = Beer.objects.filter(pk__in=[1,2,3,4,5]).first()
+    beer = Beer.objects.raw("SELECT * FROM beers_beer")
+    print("Contenido de la variable beer")
+    print(beer)
+
+    print("Nombres obtenidos del QuerySet definido anteriormente")
+    for beer in beer:
+        print(beer.name)
     #ingredient = SpecialIngredient.objects.get(pk=1)
     #beer.special_ingredients.add(ingredient)
 

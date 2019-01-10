@@ -17,10 +17,9 @@
         <div class="container">
                 <div class="row">
                 {% for beer in beer_list %}
-
                         <div class="col-sm-8 col-md-6 col-lg-4 mb-4">
                                 <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{ beer.image.url }}" alt="Card image cap" width="286px" height="300px">
+                                        <img class="card-img-top view overlay zoom" src="{{ beer.image.url }}" alt="Card image cap" width="286px" height="300px">
                                         <div class="card-body" height="200">
                                                 <h5 class="card-title">{{beer}}</h5>
                                                 <p class="card-text">{{ beer.descripcion }}</p>

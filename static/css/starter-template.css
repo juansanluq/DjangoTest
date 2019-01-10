@@ -5,3 +5,16 @@ body {
   padding: 3rem 1.5rem;
   text-align: center;
 }
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.card:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
