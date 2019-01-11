@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load staticfiles %}
 
 {% block content %}
         <p>
@@ -18,16 +17,23 @@
                 <div class="row">
                 {% for beer in beer_list %}
                         <div class="col-sm-8 col-md-6 col-lg-4 mb-4">
+                                {% if beer.is_alcoholic %}
                                 <div class="card" style="width: 18rem;">
                                         <img class="card-img-top view overlay zoom" src="{{ beer.image.url }}" alt="Card image cap" width="286px" height="300px">
                                         <div class="card-body" height="200">
                                                 <h5 class="card-title">{{beer}}</h5>
                                                 <p class="card-text">{{ beer.descripcion }}</p>
-                                                <a href="#" class="btn btn-primary">Mas información</a>
+                                                {% if beer.abv <= 4 %}
+                                                        <a href=" {% url 'beer-detail-view' beer.pk %}" class="btn btn-primary bg-success text-white">Mas información</a>
+                                                {% else %}
+                                                        <a href=" {% url 'beer-detail-view' beer.pk %}" class="btn btn-primary bg-danger text-white">Mas información</a>
+                                                {% endif %}
                                         </div>
                                 </div>
-
+                                {% endif %}
                         </div>
+                        {% empty %}
+                                {% include '404.html' %}
                 {% endfor %}
                 </div>
         </div>

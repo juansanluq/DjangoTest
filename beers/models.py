@@ -1,5 +1,4 @@
 from django.db import models
-from PIL import Image
 
 # Create your models here.
 from beers.utils import image_upload_location
