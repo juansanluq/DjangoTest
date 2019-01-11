@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from beers.views import beer_list_view, beer_detail_view
 
