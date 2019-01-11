@@ -49,10 +49,13 @@ def beer_list_view(request):
 
     #special = SpecialIngredient(name="Romero")
     #special.save()
+    beer_count = beer_list.count()
+    print(beer_count)
 
 
     context = {
-        'beer_list': Beer.objects.all()
+        'beer_list': Beer.objects.all(),
+        'beer_count': beer_list.count(),
     }
     return render(request,'beer_list.html',context)
 

@@ -24,7 +24,10 @@ body {
   font-family: 'PT Sans Caption', sans-serif, 'arial', 'Times New Roman';
 }
 
-
+.h1 {
+    position: relative;
+    left:100;
+}
 
 /* Error Page */
     .error .clip .shadow
@@ -76,6 +79,7 @@ body {
         position: relative;
         height: 250px;
         padding-top: 40px;
+        left: 100;
     }
     .error .container-error-404 .clip
     {
