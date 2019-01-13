@@ -31,8 +31,12 @@
     {% block content %}
     <form method="post" class="form-signin" action="{% url 'login' %}">
       {% csrf_token %}
-
-      {{ form }}
+        <img class="mb-4" src="{% static 'img/cerveza_logo.png' %}" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+        <label for="inputEmail" class="sr-only">Email address / Dirección de Correo</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Usuario" required autofocus>
+        <label for="inputPassword" class="sr-only">Password / Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
