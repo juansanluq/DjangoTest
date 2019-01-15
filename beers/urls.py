@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
 
 from beers import views
-from beers.views import BeerListView, BeerDetailView, CompanyEditView, CompanyDetailView, CompanyListView
+from beers.views import BeerListView, BeerDetailView, CompanyEditView, CompanyDetailView, CompanyListView, \
+    CompanyCreateView
 
 urlpatterns = [
     url(r'^list/$',BeerListView.as_view(), name='beer-list-view'),
@@ -10,6 +11,7 @@ urlpatterns = [
     url(r'^company/edit/(?P<pk>\d+)$',CompanyEditView.as_view(),name='company-edit-view'),
     url(r'^company/detail/(?P<pk>\d+)$',CompanyDetailView.as_view(),name='company-detail-view'),
     url(r'^company/list/$',CompanyListView.as_view(),name='company-list-view'),
+    url(r'^company/create/$',CompanyCreateView.as_view(),name='company-create-view'),
 ]
 
 handler404 = views.error404

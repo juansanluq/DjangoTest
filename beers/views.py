@@ -9,7 +9,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
 from beers.forms import CompanyForm
 from beers.mixins import AddMyBirthdayToContextMixin
@@ -132,8 +132,12 @@ def company_edit(request,pk):
 class CompanyEditView(UpdateView):
     model = Company
     form_class = CompanyForm
-    success_url = reverse_lazy('company-detail-view')
-    template_name = 'company/company_form.html'
+    success_url = reverse_lazy('company-list-view')
+
+class CompanyCreateView(CreateView):
+    model = Company
+    form_class = CompanyForm
+    success_url = reverse_lazy('company-list-view')
 
 
 class CompanyDetailView(DetailView):
@@ -142,7 +146,6 @@ class CompanyDetailView(DetailView):
 
 class CompanyListView(ListView):
     model = Company
-    template_name = 'company/company_detail.html'
 
 def error404(request):
     return render(request,'/templates/404.html')
