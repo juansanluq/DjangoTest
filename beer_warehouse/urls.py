@@ -20,12 +20,13 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.views.generic import RedirectView
 
-from beers.views import LoginPrueba
+from beers.views import LoginPrueba, LogOut
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('beers/', include('beers.urls')),
-    path('accounts/',include('django.contrib.auth.urls'), name='sign-in'),
+    #path('accounts/',include('django.contrib.auth.urls'), name='sign-in'),
     #url('',RedirectView.as_view(url='/beers/list/')),
-    url('pruebalogin/',LoginPrueba.as_view(),name='loginPrueba'),
+    url('accounts/login',LoginPrueba.as_view(),name='login'),
+    url('accounts/logout',LogOut.as_view(),name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
-from beers.forms import CompanyForm, LoginPruebaForm
+from beers.forms import CompanyForm, LoginPruebaForm, BeerFormset
 from beers.mixins import AddMyBirthdayToContextMixin
 from beers.models import Beer, Company, SpecialIngredient
 
@@ -68,7 +68,7 @@ def beer_list_view(request):
     }
     return render(request,'beer_list.html',context)"""
 
-class BeerListView(ListView):
+class BeerListView(LoginRequiredMixin,ListView):
     model = Beer
 
     def get_queryset(self):
@@ -92,7 +92,7 @@ class BeerListView(ListView):
     }
     return render(request, 'beer_detail.html', context)"""
 
-class BeerDetailView(DetailView):
+class BeerDetailView(LoginRequiredMixin,DetailView):
     model = Beer
 
 
@@ -130,22 +130,46 @@ def company_edit(request,pk):
     return render(request,'company/company_form.html',context)
 
 
-class CompanyEditView(UpdateView):
+class CompanyEditView(LoginRequiredMixin,UpdateView):
     model = Company
     form_class = CompanyForm
     success_url = reverse_lazy('company-list-view')
 
-class CompanyCreateView(CreateView):
+class CompanyCreateView(LoginRequiredMixin,CreateView):
     model = Company
     form_class = CompanyForm
     success_url = reverse_lazy('company-list-view')
 
+class CompanyAndBeersCreateView(LoginRequiredMixin,CreateView):
+    model = Company
+    form_class = CompanyForm
+    template_name = "beers/company_create_with_beers.html"
+    success_url = reverse_lazy('company-list-view')
 
-class CompanyDetailView(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.request.POST:
+            context['beer_formset'] = BeerFormset(self.request.POST)
+        else:
+            context['beer_formset'] = BeerFormset()
+
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        beer_formset = context['beer_formset']
+        if beer_formset.is_valid():
+            self.object = form.save()
+            beer_formset.instance = self.object
+            beer_formset.save()
+        return super().form_valid(form)
+
+class CompanyDetailView(LoginRequiredMixin,DetailView):
     model = Company
     template_name = 'company/company_detail.html'
 
-class CompanyListView(ListView):
+class CompanyListView(LoginRequiredMixin,ListView):
     model = Company
 
 def error404(request):
@@ -153,3 +177,6 @@ def error404(request):
 
 class LoginPrueba(LoginView):
     authentication_form = LoginPruebaForm
+
+class LogOut(LogoutView):
+    content_type = None

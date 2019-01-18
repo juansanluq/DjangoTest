@@ -5,8 +5,9 @@ from crispy_forms.layout import Submit
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
+from django.forms import inlineformset_factory
 
-from beers.models import Company
+from beers.models import Company, Beer
 
 """class CompanyForm(forms.Form):
     name = forms.CharField(required=True)
@@ -66,7 +67,18 @@ class LoginPruebaForm(AuthenticationForm):
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
+
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit-button',"Iniciar Sesion"))
         self.helper.form_class = "form-signin"
+        self.helper.label_class = "sr-helper"
+        self.helper.form_method = "post"
+
+class BeerForm(forms.ModelForm):
+    class Meta:
+        model = Beer
+        exclude = ['created_at', 'created_by', 'last_modified_by', 'last_modified_at']
+
+
+BeerFormset = inlineformset_factory(Company, Beer, form=BeerForm, extra=2)
 
