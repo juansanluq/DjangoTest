@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -22,26 +23,24 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+        img{
+          display: inline;
+        }
+      }
+
+      .asteriskField {
+        display: none;
       }
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static 'css/signin.css' %}" rel="stylesheet">
   </head>
   <body class="text-center">
+
     {% block content %}
     <form method="post" class="form-signin" action="{% url 'login' %}">
-      {% csrf_token %}
-
-      {{ form }}
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-1 text-muted">© 2018</p>
-      <p class="text-muted">Juan Antonio Sánchez Luque </p>
-  </form>
+      {% crispy form %}
+    </form>
   {% endblock %}
 </body>
 </html>

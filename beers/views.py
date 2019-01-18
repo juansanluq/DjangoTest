@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -11,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
-from beers.forms import CompanyForm
+from beers.forms import CompanyForm, LoginPruebaForm
 from beers.mixins import AddMyBirthdayToContextMixin
 from beers.models import Beer, Company, SpecialIngredient
 
@@ -149,3 +150,6 @@ class CompanyListView(ListView):
 
 def error404(request):
     return render(request,'/templates/404.html')
+
+class LoginPrueba(LoginView):
+    authentication_form = LoginPruebaForm

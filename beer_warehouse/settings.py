@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'beers',
     "bars",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = ''
 
 LOGIN_REDIRECT_URL = reverse_lazy('beer-list-view')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,4 +1,9 @@
+import unicodedata
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
 
 from beers.models import Company
@@ -11,6 +16,12 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         exclude = ['created_at','created_by','last_modified_by','last_modified_at']
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "company-form"
+        self.helper.form_class = "blue"
 
     def clean_name(self):
         name = self.cleaned_data['name']
@@ -33,3 +44,29 @@ class CompanyForm(forms.ModelForm):
 
         if name == "pepe" and tax_numer < 3:
             self.add_error('tax_number',"No puede ser menor que 3")
+
+
+class LoginPruebaForm(AuthenticationForm):
+    username = forms.CharField(
+        label='Usuario',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Usuario'
+            }
+        )
+    )
+    password = forms.CharField(
+        label='Contraseña',
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Contraseña'
+            }
+        )
+    )
+
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.helper = FormHelper()
+        self.helper.add_input(Submit('submit-button',"Iniciar Sesion"))
+        self.helper.form_class = "form-signin"
+
