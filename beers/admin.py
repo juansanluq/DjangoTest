@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from beers.models import Beer, Company
+from beers.models import Beer, Company, Receta
+
 
 class BeerAdmin(admin.ModelAdmin):
     list_display = ("name","abv","is_filtered","image")
@@ -14,6 +15,7 @@ class BeerAdmin(admin.ModelAdmin):
 
 admin.site.register(Beer,BeerAdmin)
 admin.site.register(Company)
+admin.site.register(Receta)
 
 @receiver(post_save, sender=Beer)
 def my_handler(sender, **kwargs):

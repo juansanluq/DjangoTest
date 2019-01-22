@@ -27,6 +27,8 @@ from beers.views import LoginPrueba
 router = routers.DefaultRouter()
 router.register('beers',views.BeerViewSet)
 router.register('company',views.CompanyViewSet)
+router.register('users',views.UserViewSet)
+router.register('recetas',views.RecetaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

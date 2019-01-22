@@ -18,6 +18,19 @@ class Company(CommonInfo):
         return self.name
 
 
+class Receta(CommonInfo):
+    name = models.CharField('Nombre', max_length=50)
+    tiempo_preparacion = models.IntegerField('Tiempo de preparación',default=0)
+    pdf = models.FileField(upload_to='documents/',default=False)
+
+    class Meta:
+        verbose_name = "Receta"
+        verbose_name_plural = "Recetas"
+        ordering = ['-name']
+
+    def __str__(self):
+        return self.name
+
 
 class Beer(CommonInfo):
     COLOR_AMARILLO = 1

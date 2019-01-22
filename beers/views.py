@@ -68,8 +68,11 @@ def beer_list_view(request):
     }
     return render(request,'beer_list.html',context)"""
 
-class BeerListView(ListView):
+class BeerListView(LoginRequiredMixin,ListView):
     model = Beer
+
+    def __init__(self):
+        self.login_url = "loginPrueba"
 
     def get_queryset(self):
         return Beer.objects.all()
@@ -92,7 +95,7 @@ class BeerListView(ListView):
     }
     return render(request, 'beer_detail.html', context)"""
 
-class BeerDetailView(DetailView):
+class BeerDetailView(LoginRequiredMixin,DetailView):
     model = Beer
 
 
@@ -130,22 +133,22 @@ def company_edit(request,pk):
     return render(request,'company/company_form.html',context)
 
 
-class CompanyEditView(UpdateView):
+class CompanyEditView(LoginRequiredMixin,UpdateView):
     model = Company
     form_class = CompanyForm
     success_url = reverse_lazy('company-list-view')
 
-class CompanyCreateView(CreateView):
+class CompanyCreateView(LoginRequiredMixin,CreateView):
     model = Company
     form_class = CompanyForm
     success_url = reverse_lazy('company-list-view')
 
 
-class CompanyDetailView(DetailView):
+class CompanyDetailView(LoginRequiredMixin,DetailView):
     model = Company
     template_name = 'company/company_detail.html'
 
-class CompanyListView(ListView):
+class CompanyListView(LoginRequiredMixin,ListView):
     model = Company
 
 def error404(request):
