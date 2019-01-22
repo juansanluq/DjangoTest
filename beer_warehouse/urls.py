@@ -19,14 +19,20 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import url
 from django.views.generic import RedirectView
+from rest_framework import routers
 
-from beers.views import LoginPrueba, LogOut
+from beers.api import views
+from beers.views import LoginPrueba
+
+router = routers.DefaultRouter()
+router.register('beers',views.BeerViewSet)
+router.register('company',views.CompanyViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('beers/', include('beers.urls')),
-    #path('accounts/',include('django.contrib.auth.urls'), name='sign-in'),
+    path('accounts/',include('django.contrib.auth.urls'), name='sign-in'),
     #url('',RedirectView.as_view(url='/beers/list/')),
-    url('accounts/login',LoginPrueba.as_view(),name='login'),
-    url('accounts/logout',LogOut.as_view(),name='logout'),
+    url('pruebalogin/',LoginPrueba.as_view(),name='loginPrueba'),
+    url('api/',include(router.urls))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'beers',
     "bars",
     "crispy_forms",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
