@@ -22,7 +22,7 @@ from django.views.generic import RedirectView
 from rest_framework import routers
 
 from beers.api import views
-from beers.api.views import UserListAPI
+from beers.api.views import UserListAPI, UserDetailAPI
 from beers.views import LoginPrueba
 
 """router = routers.DefaultRouter()
@@ -40,5 +40,6 @@ urlpatterns = [
     #url('api/',include(router.urls)),
 
     # User API URLs
-    url(r'^api/1.0/usuarios/$', UserListAPI.as_view(),name='user-list-api')
+    url(r'^api/1.0/usuarios/$', UserListAPI.as_view(),name='user-list-api'),
+    url(r'^api/1.0/usuarios/(?P<pk>[0-9]+)$', UserDetailAPI.as_view(),name='user-detail-api')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
